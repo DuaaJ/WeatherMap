@@ -20,3 +20,13 @@ async function fetchJson(url, notFoundMsg) {
     return response.json();
 }
 
+async function getCoordinates(location) {
+    const url= `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`;   //"Paris, France"  ->encodeURIComponent() converts it to Paris%2C%20France — a safe URL string.
+    const data = await fetchJson(url, 'Location sevice failed');    //fetch() sends the HTTP request  , await pauses execution here until the server responds  , answer holds the metadata — not the data yet
+
+    if(data.length=== 0){ 
+        throw new Error(`Location "${location}" not found.`);
+    }
+    return{ lat:parseFloat(data[0].lat),  lng:parseFloat(data[0].lon)};     
+}
+
