@@ -304,5 +304,31 @@ form input:focus {
 .twitter {
     background-color: #000000;
 }
+@media (max-width: 600px) {
+    .header {
+        padding: 28px 6%;
+    }
+    .search {
+        width: 88%;
+        margin: 24px auto;
+    }
+    .form {
+        flex-direction: column;
+    }
+    .form input,
+    .button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #error {
+        width: 88%;
+    }
+    #map {
+        width: 92%;
+    }
+    .leaflet-popup-content {
+        width: 210px;
+    }
+}
 
 
