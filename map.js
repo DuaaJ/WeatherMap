@@ -93,4 +93,28 @@ function popup(weather){
     shareOptions.classList.toggle("open");
     });
     
+    const whatsapp = popup.querySelector(".whatsapp");
+    if (whatsapp) {
+        whatsapp.addEventListener("click", () => {
+            const url = `https://wa.me/?text=${encodeURIComponent(share)}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+        });
+    }
    
+    const facebook = popup.querySelector(".facebook");
+    if (facebook) {
+        facebook.addEventListener("click", () => {
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const twitter = popup.querySelector(".twitter");
+    if (twitter) {
+        twitter.addEventListener("click", () => {
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(share)}&url=${encodeURIComponent(pageUrl)}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+        });
+    }
+    return popup;
+}
