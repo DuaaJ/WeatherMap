@@ -69,4 +69,28 @@ form.addEventListener('submit', async(event)=>{
     }
 });
 
+function popup(weather){
+    const template =document.getElementById("popup");
+    const popup =document.importNode(template.content.firstElementChild, true);
 
+    popup.querySelector(".location").textContent =`${weather.name}, ${weather.sys.country}`;
+    const icon =weather.weather[0].icon;
+    const weatherIcon =popup.querySelector(".icon");
+    weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    weatherIcon.alt = weather.weather[0].description;
+    popup.querySelector(".temperature").textContent =`${Math.round(weather.main.temp)}°C`;
+    popup.querySelector(".description").textContent =weather.weather[0].description;
+    popup.querySelector(".humidity").innerHTML =`<i class="fa-solid fa-droplet icon-water"></i>Humidity: ${weather.main.humidity}%`;
+    popup.querySelector(".wind").innerHTML = `<i class="fa-solid fa-wind icon-wind"></i>Wind: ${weather.wind.speed} m/s`;
+    popup.querySelector(".cloud").innerHTML =`<i class="fa-solid fa-cloud icon-cloud"></i>Clouds: ${weather.clouds.all}%`;
+    
+    const share= `Weather in ${weather.name}: ${Math.round(weather.main.temp)}°C, ${weather.weather[0].description}`;
+    const pageUrl = window.location.href;
+
+    const shareButton = popup.querySelector(".share");
+    const shareOptions = popup.querySelector(".share-options");
+    shareButton.addEventListener("click", () => {
+    shareOptions.classList.toggle("open");
+    });
+    
+   
