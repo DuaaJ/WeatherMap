@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherMap</title>
+    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <img src="images/sunshine.png" alt="WeatherMap logo" class="logo">
+        <div class="header-text">
+        <h1>WeatherMap</h1>
+        <p>Explore real-time weather across the globe.</p>
+        </div>
+    </header>
+    <section class="search">
+        <h2>Find Location</h2>
+        <div class="search-box">
+            <form  class="form" id="search">
+               <input type="text" placeholder="Enter a city or location" id="input" required>
+              <button type="submit" class="button">Get Weather</button>
+            </form>
+        </div>
+    </section>
+    <!-- spinner hidden-->
+     <div class="hidden" id="spinner"  role="status"  aria-live="polite">
+       <span class="spinner-icon" aria-hidden="true"></span>
+        <span>Getting the latest weather...</span>
+    </div>
+
+     <template id="popup">
+        <div class="weather">
+            <h3 class="location"></h3>
+            <img class="icon" src="">
+            <p class="temperature"></p>
+            <p class="description"></p>
+            <p class="humidity"><i class="fa-solid fa-droplet"></i></p>
+            <p class="wind"><i class="fa-solid fa-wind"></i></p>
+            <p class="cloud"><i class="fa-solid fa-cloud"></i></p> 
+            <button type="button" class="share" aria-expanded="false">Share</button> 
+
+            <div class="share-options">
+                <button type="button" class="option whatsapp" aria-label="whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <button type="button" class="option facebook" aria-label="facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </button>
+                <button type="button" class="option twitter" aria-label="twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </button>
+            </div>
+        </div>
+     </template>
+     
+       <div class="hidden" id="error"></div> <!-- error block-->
+       <div id="map"></div>
+
+       <footer class="footer">
+        <p>WeatherMap &copy; 2026</p>
+       </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="map.js"></script>
+
+</body>
+</html>
