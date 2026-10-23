@@ -29,4 +29,44 @@ async function getCoordinates(location) {
     }
     return{ lat:parseFloat(data[0].lat),  lng:parseFloat(data[0].lon)};     
 }
+const API_KEY = "1b89a68e83643643c9d9230fc8520978"; 
+async function getWeather(lat, lng) {     
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`; 
+    return fetchJson(url, 'No weather data found for this location.');   
+}
+
+let currentMark =null;
+form.addEventListener('submit', async(event)=>{
+    event.preventDefault();
+    const errorBlock = document.getElementById('error');
+    const spinner = document.getElementById('spinner')
+    spinner.classList.remove('hidden');
+    errorBlock.classList.add('hidden');
+    errorBlock.textContent='';
+    try{
+        const location = input.value.trim();
+        if (!location) {
+    throw new Error('Please enter a Location.');
+}
+        const coord =await getCoordinates(location);
+        const weather =await getWeather(coord.lat, coord.lng);
+        //remove current marker
+        if(currentMark){
+            map.removeLayer(currentMark);
+        }
+        //move to the new location
+        map.flyTo([coord.lat, coord.lng], 10);   //10 zoom level
+        //add the new marker
+        currentMark=L.marker([coord.lat, coord.lng]).addTo(map);
+        // weather popup
+        currentMark.bindPopup(popup(weather)).openPopup();
+    }catch (error){
+        const errorBlock = document.getElementById('error');
+        errorBlock.textContent=error.message;
+        errorBlock.classList.remove('hidden');
+    } finally{
+        spinner.classList.add('hidden');
+    }
+});
+
 
